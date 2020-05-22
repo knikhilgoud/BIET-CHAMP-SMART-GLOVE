@@ -1,0 +1,242 @@
+
+#include <SoftwareSerial.h>
+#include <LiquidCrystal.h>
+//SoftwareSerial Serial(12, 13); // bluetooth RX, TX
+LiquidCrystal lcd(2,3,4,5,6,7);
+
+#define f1Pin A0
+#define f2Pin A1
+#define f3Pin A2
+#define f4Pin A3
+#define f5Pin A4
+
+#define v0 8
+#define v1 9
+#define v2 10
+#define v3 11
+#define v4 12
+#define v5 13
+#define v6 A7
+
+unsigned int f1 = 0;
+unsigned int f2 = 0;
+ unsigned int f3 = 0;
+unsigned int f4 = 0;
+unsigned int f5 = 0;
+unsigned int f6 = 0;
+unsigned int f7 = 0;
+unsigned int f8 = 0;
+
+void setup()
+{
+  // initialize serial for debugging
+  Serial.begin(9600);
+
+pinMode(f1Pin,INPUT);
+pinMode(f2Pin,INPUT);
+pinMode(f3Pin,INPUT);
+pinMode(f4Pin,INPUT);
+pinMode(f5Pin,INPUT);
+
+
+pinMode(v0,OUTPUT);
+pinMode(v1,OUTPUT);
+pinMode(v2,OUTPUT);
+pinMode(v3,OUTPUT);
+pinMode(v4,OUTPUT);
+pinMode(v5,OUTPUT);
+pinMode(v6,OUTPUT);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+digitalWrite(v6,HIGH);
+
+  // initialize serial for ESP module
+  Serial.begin(9600);
+  lcd.begin(16,2);
+  Serial.println("WELCOME TO HAND TALK");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("WELCOME TO HAND ");
+  lcd.setCursor(0,1);
+  lcd.print("TALK PATIENT SYTM");
+  delay(1000);
+
+digitalWrite(v0,LOW);
+delay(300);
+digitalWrite(v0,HIGH);
+delay(1000);
+  
+}
+
+void loop()
+{
+
+    f1 = analogRead(f1Pin);
+    f2 = analogRead(f2Pin);
+    f3 = analogRead(f3Pin);
+    f4 = analogRead(f4Pin);
+    f5 = analogRead(f5Pin);
+    
+    Serial.print("f1: "); Serial.println(f1);
+    Serial.print("f2: "); Serial.println(f2);
+    Serial.print("f3: "); Serial.println(f3);
+    Serial.print("f4: "); Serial.println(f4);
+    Serial.print("f5: "); Serial.println(f5);
+    delay(500);
+    Serial.println("-----------------------");
+    
+if (f1>150)
+{
+Serial.println("i NEED FOOD plese help me");
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("I NEED FOOD ");
+  lcd.setCursor(0,1);
+  lcd.print("PLEASE HELP ME");
+  delay(800);
+digitalWrite(v0,HIGH);
+digitalWrite(v1,LOW);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+delay(200);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+
+Serial.println("I NEED FOOD\nPLESE HELP ME");delay(1000);
+
+}
+//----------F2---------
+else if (f2>140)
+{
+Serial.println("i NEED WATER plese help me");
+
+lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("I NEED WATER ");
+  lcd.setCursor(0,1);
+  lcd.print("PLEASE HELP ME");
+  delay(800);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,LOW);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+delay(200);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+Serial.println("I NEED WAATER\nPLESE HELP ME");delay(1000);
+}
+//------f3----------
+else if (f3<955)
+{
+Serial.println("i HAVE SOME EMERGENCY plese help me");
+lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("I HAVE EMERGENCY ");
+  lcd.setCursor(0,1);
+  lcd.print("PLEASE HELP ME");
+  delay(800);
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,LOW);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+delay(200);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+Serial.println("I HAVE SOME EMERGENCY \nPLESE HELP ME");delay(1000);
+}
+//------f4----------------
+else if (f4<955)
+{
+Serial.println("i NEED Go Out Side plese help me");
+lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("I NEED GO OUT ");
+  lcd.setCursor(0,1);
+  lcd.print("PLEASE HELP ME");
+  delay(800);
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,LOW);
+digitalWrite(v5,HIGH);
+delay(200);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+Serial.println("I want Go OutSide\nPLESE HELP ME");delay(1000);
+}
+//-------f5------------
+else if (f5<955)
+{
+Serial.println("i want go REST room plese help me");
+lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("I WANT TO REST ");
+  lcd.setCursor(0,1);
+  lcd.print("ROOM PLS HELP ME");
+  delay(800);
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,LOW);
+delay(200);
+
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+Serial.println("I WANT TO GO REST ROOM\nPLESE HELP ME");delay(1000);
+}
+else
+{
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("PATIENT NORMAL");
+  lcd.setCursor(0,1);
+  lcd.print("**CONDITION**");
+  delay(800);
+digitalWrite(v0,HIGH);
+digitalWrite(v1,HIGH);
+digitalWrite(v2,HIGH);
+digitalWrite(v3,HIGH);
+digitalWrite(v4,HIGH);
+digitalWrite(v5,HIGH);
+}
+
+}//loop
